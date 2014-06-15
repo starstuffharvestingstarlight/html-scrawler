@@ -1,0 +1,17 @@
+{
+	"name": "html-scrawler",
+	"description": "turns an image into ascii art, html tags, etc, to get around image restrictions on websites",
+	"version": "0.0.1",
+	"// @see": "https://github.com/angular/angular-seed",
+	"repository": "https://github.com/starstuffharvestingstarlight/html-scrawler",
+	"license": "GPLv3",
+	"private": true,
+	"dependencies": {
+		"angular": "1.2.x",
+		"angular-route": "1.2.x",
+		"angular-loader": "1.2.x",
+		"angular-mocks": "~1.2.x",
+		"angular-sanitize": "~1.2.x",
+		"html5-boilerplate": "~4.3.0"
+	}
+}

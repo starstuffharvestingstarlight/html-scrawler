@@ -1,0 +1,14 @@
+body {
+	font-family: monospace;
+	background-color: #131313;
+	color: #F92672;
+}
+#width, #height {
+	width: 3em;
+	background-color: #191919;
+	color: #AE81FF;
+	border: none;
+}
+canvas {
+	border: 1px solid black;
+}
