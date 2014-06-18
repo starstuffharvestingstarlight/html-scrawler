@@ -1,7 +1,7 @@
-<pre id=imageLoader>
-	<label for=imageLoader>Image File:</label> <input type="file" id="imageLoader" name="imageLoader"/>
+<div id=imageLoader ng-controller="imageLoaderController">
+	<label for=imageLoader>Image File:</label> <input type="file" id="imageLoader" name="imageLoader" fileread="preview.file" />
 
-	<label for=width>Width:</label> <input ng-model="preview.width" type="number" id="width" /> <label for=height>Height:</label> <input ng-model="preview.height" type="number" id="height" />
+	<label for=width>Width:</label> <input ng-model="preview.width" ng-change="preview.update()" type="number" id="width" /> <label for=height>Height:</label> <input ng-model="preview.height" ng-change="preview.update()" type="number" id="height" />
 
 	<canvas id=imageCanvas width="{{ preview.width }}" height="{{ preview.height }}"></canvas>
-</pre>
+</div>
