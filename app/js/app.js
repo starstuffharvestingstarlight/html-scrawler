@@ -28,20 +28,22 @@ app.
 				@see https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canvas
 				@see http://jsfiddle.net/influenztial/qy7h5/
 				*/
-				try {
-					var img = new Image();
-					img.onload = function() {
-						document.
-						getElementById('imageCanvas').
-						getContext('2d').
-						drawImage(img, 0, 0, $scope.preview.width, $scope.preview.height);
+				if ($scope.preview.file) {
+					try {
+						var img = new Image();
+						img.onload = function() {
+							document.
+							getElementById('imageCanvas').
+							getContext('2d').
+							drawImage(img, 0, 0, $scope.preview.width, $scope.preview.height);
+						}
+						img.src = $scope.preview.file;
+					} catch (ex) {
+						console.log(ex);
 					}
-					img.src = this.file;
-				} catch (ex) {
-					console.log(ex);
 				}
 			}
-		}
+		};
 	}])
 ;
 
@@ -62,11 +64,9 @@ app.
 				element.bind('change', function (changeEvent) {
 					var reader = new FileReader();
 					reader.onload = function (loadEvent) {
-						scope.$apply(function () {
-							scope.$parent.preview.file = loadEvent.target.result;
-						});
+						scope.$parent.preview.file = loadEvent.target.result;
 						scope.$parent.preview.update();
-					}
+					};
 					reader.readAsDataURL(changeEvent.target.files[0]);
 				});
 			}
