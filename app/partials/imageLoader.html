@@ -4,4 +4,9 @@
 	<label for=width>Width:</label> <input ng-model="preview.width" ng-change="preview.update()" type="number" id="width" /> <label for=height>Height:</label> <input ng-model="preview.height" ng-change="preview.update()" type="number" id="height" />
 
 	<canvas id=imageCanvas width="{{ preview.width }}" height="{{ preview.height }}"></canvas>
+
+	<div ng-model="effects" ng-repeat="effect in effects" />
+		<div id="effect-{{ $index }}" ng-bind-html="effect.result">{{ effect.result }}</div>
+	</div>
 </div>
+

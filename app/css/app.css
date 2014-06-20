@@ -3,7 +3,7 @@ body {
 	background-color: #131313;
 	color: #F92672;
 }
-#imageLoader {
+#imageLoader, #effectsContainer {
 	width: 80%;
 	margin: auto;
 	white-space: pre;
