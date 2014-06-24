@@ -3,12 +3,12 @@ body {
 	background-color: #131313;
 	color: #F92672;
 }
-#imageLoader, #effectsContainer {
+#imageLoaderContainer {
 	width: 80%;
 	margin: auto;
 	white-space: pre;
 }
-#width, #height {
+input[type=number] {
 	width: 3em;
 	background-color: #191919;
 	color: #AE81FF;

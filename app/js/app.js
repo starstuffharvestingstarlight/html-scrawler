@@ -16,10 +16,15 @@ var app = angular.
 app.
 	controller('imageLoaderController', ['$scope', 'EffectFactory', function($scope, EffectFactory) {
 			$scope.effects = EffectFactory;
-			$scope.preview = {
-				file: null,
+			$scope.options = {
 				width: 64,
 				height: 64,
+				invert: false,
+				levels: 2,
+				crop: { x:0, y:0, w:64, h:64 }
+			}
+			$scope.preview = {
+				file: null,
 				update: function() {
 					/**
 					@see https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canvas
@@ -30,9 +35,9 @@ app.
 							var img = new Image();
 							img.onload = function() {
 								var ctx = document.getElementById('imageCanvas').getContext('2d');
-								ctx.drawImage(img, 0, 0, $scope.preview.width, $scope.preview.height);
+								ctx.drawImage(img, 0, 0, $scope.options.width, $scope.options.height);
 								for (var i=0; i<$scope.effects.length; i++) {
-									$scope.effects[i].process(ctx);
+									$scope.effects[i].process($scope, ctx);
 								}
 								$scope.$apply();
 							}

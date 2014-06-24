@@ -2,10 +2,15 @@ app.
 	factory('EffectFactory', ['$sce', function($sce) {
 		return [
 			{
-				process: function (ctx) {
-					w = ctx.canvas.width
-					h = ctx.canvas.height
-					inData = ctx.getImageData(0,0,w,h)
+				name: 'utf8 blocks',
+				process: function (scope, ctx) {
+					w = scope.options.crop.w
+					h = scope.options.crop.h
+
+					inData = ctx.getImageData(
+						scope.options.crop.x, scope.options.crop.y, 
+						w, h
+					)
 					outctx = document.getElementById('debugCanvas').getContext('2d')
 					outctx.putImageData(inData, 0, 0)
 					outData = outctx.getImageData(0,0,w,h)
@@ -13,10 +18,12 @@ app.
 					P = new Pixastic(outctx, 'lib/vendor/pixastic/')
 					P.posterize({levels: 4}).done(function() {})
 					*/
-					Pixastic.Effects.posterize(inData.data, outData.data, w, h, {levels: 2})
+					outData.data = inData.data
+					if (scope.options.invert)
+						Pixastic.Effects.invert(outData.data, outData.data, w, h)
+					Pixastic.Effects.posterize(outData.data, outData.data, w, h, {levels: scope.options.levels})
 					Pixastic.Effects.desaturate(outData.data, outData.data, w, h)
 					outctx.putImageData(outData, 0, 0)
-					console.log(outData.data)
 
 					// TODO: replace with distinct b/w values
 					blocks = {
@@ -34,7 +41,8 @@ app.
 				}
 			},
 			{
-				process: function (ctx) {
+				name: 'html divs',
+				process: function (scope, ctx) {
 					this.result = $sce.trustAsHtml('<strong>Placeholder for effect 2</strong>');
 				}
 			},

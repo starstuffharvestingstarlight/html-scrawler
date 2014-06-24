@@ -1,9 +1,24 @@
-<div id=imageLoader ng-controller="imageLoaderController">
-	<label for=imageLoader>Image File:</label> <input type="file" id="imageLoader" name="imageLoader" fileread="preview.file" />
+<div id=imageLoaderContainer ng-controller="imageLoaderController">
+	<label for=imageLoader>Source Image File:</label> <canvas id=imageCanvas width="{{ options.width }}" height="{{ options.height }}"></canvas> <input type="file" id="imageLoader" name="imageLoader" fileread="preview.file" />
 
-	<label for=width>Width:</label> <input ng-model="preview.width" ng-change="preview.update()" type="number" id="width" /> <label for=height>Height:</label> <input ng-model="preview.height" ng-change="preview.update()" type="number" id="height" />
+	Base Dimensions: { // good to distort the image 
+		<label for=width>Width:</label> <input ng-model="options.width" ng-change="preview.update()" type="number" id="width" />
+		<label for=height>Height:</label> <input ng-model="options.height" ng-change="preview.update()" type="number" id="height" />
+	}
 
-	<canvas id=imageCanvas width="{{ preview.width }}" height="{{ preview.height }}"></canvas> <canvas id=debugCanvas width="{{ preview.width }}" height="{{ preview.height }}"></canvas>
+	Processing: {
+		<label for=invert>Invert:</label> <input type="checkbox" ng-model="options.invert" ng-change="preview.update()" id=invert/>
+		<label for=levels>Posterise levels:</label> <input type="number" ng-model="options.levels" ng-change="preview.update()" id=levels/>
+	}
+	
+	Crop: {
+		x:<input ng-model="options.crop.x" ng-change="preview.update()" type="number" id="crop_x" />
+		y:<input ng-model="options.crop.y" ng-change="preview.update()" type="number" id="crop_y" />
+		w:<input ng-model="options.crop.w" ng-change="preview.update()" type="number" id="crop_w" />
+		h:<input ng-model="options.crop.h" ng-change="preview.update()" type="number" id="crop_h" />
+	}
+
+	Image preview: { <canvas id=debugCanvas width="{{ options.crop.w }}" height="{{ options.crop.h }}"></canvas> }
 
 	<div ng-model="effects" ng-repeat="effect in effects" />
 		<div id="effect-{{ $index }}" ng-bind-html="effect.result">{{ effect.result }}</div>
