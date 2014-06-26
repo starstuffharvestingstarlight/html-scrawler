@@ -1,5 +1,10 @@
 <div id=imageLoaderContainer ng-controller="imageLoaderController">
+	<div ng-model="selection" id=effectContainer />
+		<div id="effect-{{ selection.name }}" ng-bind-html="selection.result">{{ selection.result }}</div>
+	</div>
 	<label for=imageLoader>Source Image File:</label> <canvas id=imageCanvas width="{{ options.width }}" height="{{ options.height }}"></canvas> <input type="file" id="imageLoader" name="imageLoader" fileread="preview.file" />
+
+	Effect: <select ng-model="selection" ng-options="effect.name for effect in effects" ng-change="preview.update()"></select>
 
 	Base Dimensions: { // good to distort the image 
 		<label for=width>Width:</label> <input ng-model="options.width" ng-change="preview.update()" type="number" id="width" />
@@ -20,8 +25,5 @@
 
 	Image preview: { <canvas id=debugCanvas width="{{ options.crop.w }}" height="{{ options.crop.h }}"></canvas> }
 
-	<div ng-model="effects" ng-repeat="effect in effects" />
-		<div id="effect-{{ $index }}" ng-bind-html="effect.result">{{ effect.result }}</div>
-	</div>
 </div>
 

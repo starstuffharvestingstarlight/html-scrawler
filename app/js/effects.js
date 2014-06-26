@@ -26,15 +26,10 @@ app.
 					outctx.putImageData(outData, 0, 0)
 
 					// TODO: replace with distinct b/w values
-					blocks = {
-						255: '█',
-						227: '▓',
-						76:  '▒',
-						0:   '░',
-					}
+					blocks = [ '█', '▓', '▒', '░' ]
 					str = ''
 					for (var i = 0, n = w * h * 4, c = 0; i < n; i+=4, c++) {
-						str += blocks[outData.data[i]] || ' '
+						str += blocks[Math.round((outData.data[i] || 0) / (255/3))]
 						if (c % w == w-1) str += '\n'
 					}
 					this.result = $sce.trustAsHtml('<pre style="font-size:.5em">' + str + '</pre>');

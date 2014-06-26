@@ -16,6 +16,7 @@ var app = angular.
 app.
 	controller('imageLoaderController', ['$scope', 'EffectFactory', function($scope, EffectFactory) {
 			$scope.effects = EffectFactory;
+			$scope.selection = $scope.effects[0];
 			$scope.options = {
 				width: 64,
 				height: 64,
@@ -36,9 +37,7 @@ app.
 							img.onload = function() {
 								var ctx = document.getElementById('imageCanvas').getContext('2d');
 								ctx.drawImage(img, 0, 0, $scope.options.width, $scope.options.height);
-								for (var i=0; i<$scope.effects.length; i++) {
-									$scope.effects[i].process($scope, ctx);
-								}
+								$scope.selection.process($scope, ctx);
 								$scope.$apply();
 							}
 							img.src = $scope.preview.file;
